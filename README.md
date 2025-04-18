@@ -1,18 +1,24 @@
 # BullMq (Queues and Workers)
+
 BullMQ is a high-performance, Redis-based distributed queue system for Node.js, designed for reliability and scalability. It enables efficient job processing with features like prioritization, concurrency control, delayed jobs, repeatable jobs, and automatic retries. BullMQ is optimized for microservices architectures, ensuring exactly-once queue semantics and horizontal scalability by allowing multiple workers to process jobs in parallel. It also supports parent-child dependencies, rate limiting, and telemetry for monitoring job execution.
 
 ## Redis setup
+
 ### Step 1: Install Docker Desktop
+
 https://www.docker.com/products/docker-desktop/
 
 ### Step 2: Pull and Run the Redis Docker Image
+
 - Open a terminal or command prompt.
 - Run the following command to pull the Redis Docker image:
+
 ```bash
 docker pull redis
 ```
 
 - Run the following command to start a Redis container:
+
 ```bash
 docker run --name my-redis -d -p 6379:6379 redis
 ```
