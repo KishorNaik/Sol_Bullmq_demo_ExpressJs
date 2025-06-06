@@ -31,12 +31,12 @@ export const publishQueuesAsync = <T extends Object>(
 };
 
 export const getReplyAsync = async <T extends Object>(
-  queueJob:Job<any, any, string>,
-  queueEvents: QueueEvents,
+	queueJob: Job<any, any, string>,
+	queueEvents: QueueEvents
 ): Promise<T> => {
-  const jobResult = await queueJob.waitUntilFinished(queueEvents);
-  return jobResult as T;
-}
+	const jobResult = await queueJob.waitUntilFinished(queueEvents);
+	return jobResult as T;
+};
 
 export const runWorkers = (
 	queueName: string,
