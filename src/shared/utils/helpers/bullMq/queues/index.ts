@@ -1,4 +1,4 @@
-import { Processor, Queue, Worker, ConnectionOptions, QueueEvents } from 'bullmq';
+import { Processor, Queue, Worker, ConnectionOptions, QueueEvents, Job } from 'bullmq';
 import { getIORedisConnection } from '../../redis';
 
 export const bullMqRedisConnection = getIORedisConnection();
@@ -29,6 +29,14 @@ export const publishQueuesAsync = <T extends Object>(
 		attempts: 3,
 	});
 };
+
+export const getReplyAsync = async <T extends Object>(
+  queueJob:Job<any, any, string>,
+  queueEvents: QueueEvents,
+): Promise<T> => {
+  const jobResult = await queueJob.waitUntilFinished(queueEvents);
+  return jobResult as T;
+}
 
 export const runWorkers = (
 	queueName: string,

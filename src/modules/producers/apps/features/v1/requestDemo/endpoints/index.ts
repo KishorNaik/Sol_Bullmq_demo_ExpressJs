@@ -24,11 +24,12 @@ import mediatR from '@/shared/medaitR/index';
 import { StatusCodes } from 'http-status-codes';
 import {
 	bullMqRedisConnection,
+	getReplyAsync,
 	publishQueuesAsync,
 	setQueueEvents,
 	setQueues,
 } from '@/shared/utils/helpers/bullMq/queues';
-import { ReplyDemoRequestDto } from '@/modules/consumers/apps/features/v1/replyDemo';
+import { ReplyDemoRequestDto, ReplyDemoResponseDto } from '@/modules/consumers/apps/features/v1/replyDemo';
 import { QueueEvents } from 'bullmq';
 
 // Set Queues
@@ -54,14 +55,16 @@ export class RequestDemoController {
 		const job = await publishQueuesAsync(replyQueues, `request-reply-demo`, jobRequest);
 
 		// wait for the job to complete
-		const jobResult = await job.waitUntilFinished(replyQueueEvents);
+		const jobResult = await getReplyAsync<ReplyDemoResponseDto>(job,replyQueueEvents);
 		console.log(`Job published with ID: ${job.id}`);
 		console.log(`Job result: ${JSON.stringify(jobResult)}`);
+    console.log(`Job result ID: ${jobResult.id} - Job result Message: ${jobResult.message}`);
 
 		// Response
 		const response = DataResponseFactory.Response(
 			true,
 			StatusCodes.OK,
+      jobResult,
 			'Get Reply from Producer Modules Successfully'
 		);
 		return res.status(response.StatusCode).json(response);
