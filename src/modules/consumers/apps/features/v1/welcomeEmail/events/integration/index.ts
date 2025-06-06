@@ -1,5 +1,5 @@
 import { sealed } from '@/shared/utils/decorators/sealed';
-import { runWorkers } from '@/shared/utils/helpers/bullMq/queues';
+import { bullMqRedisConnection, runWorkers } from '@/shared/utils/helpers/bullMq/queues';
 import { logConstruct, logger } from '@/shared/utils/helpers/loggers';
 import { NotificationData, notificationHandler, NotificationHandler } from 'mediatr-ts';
 import { WelcomeEmailNotificationIntegrationEventRequestDto } from '../../contracts';
@@ -74,7 +74,8 @@ const sendWelcomeUserEmailIntegrationEventWorkers = runWorkers(
 				`Domain Event Success`
 			)
 		);
-	}
+	},
+  bullMqRedisConnection
 );
 
 // Handle errors
@@ -87,5 +88,15 @@ sendWelcomeUserEmailIntegrationEventWorkers.on('failed', (job, err) => {
 			err
 		)
 	);
+});
+
+sendWelcomeUserEmailIntegrationEventWorkers.on('completed', (job) => {
+  logger.info(
+    logConstruct(
+      'sendWelcomeUserEmailIntegrationEventWorkers',
+      'worker',
+      `Job:${job.id} completed for UserId:${job.data?.identifier}`
+    )
+  );
 });
 // @endregion
