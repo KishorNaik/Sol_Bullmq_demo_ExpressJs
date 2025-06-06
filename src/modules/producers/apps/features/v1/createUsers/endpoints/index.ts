@@ -13,14 +13,18 @@ import { OpenAPI } from 'routing-controllers-openapi';
 import { Response } from 'express';
 import { CreateUserRequestDto } from '../contracts';
 import { logConstruct, logger } from '@/shared/utils/helpers/loggers';
-import { bullMqRedisConnection, publishQueuesAsync, setQueues } from '@/shared/utils/helpers/bullMq/queues';
+import {
+	bullMqRedisConnection,
+	publishQueuesAsync,
+	setQueues,
+} from '@/shared/utils/helpers/bullMq/queues';
 import { WelcomeEmailNotificationIntegrationEventRequestDto } from '@/modules/consumers/apps/features/v1/welcomeEmail';
 import { DataResponseFactory } from '@/shared/models/response/data.Response';
 
 // Set Queues
 const sendWelcomeUserEmailIntegrationEventQueues = setQueues(
 	'sendWelcomeUserEmailIntegrationEventQueues',
-  bullMqRedisConnection
+	bullMqRedisConnection
 );
 
 @JsonController('/api/v1/users')

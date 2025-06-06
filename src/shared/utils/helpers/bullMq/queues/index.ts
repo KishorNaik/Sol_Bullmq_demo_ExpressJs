@@ -1,19 +1,22 @@
-import { Processor, Queue, Worker,ConnectionOptions, QueueEvents } from 'bullmq';
+import { Processor, Queue, Worker, ConnectionOptions, QueueEvents } from 'bullmq';
 import { getIORedisConnection } from '../../redis';
 
 export const bullMqRedisConnection = getIORedisConnection();
 
-export const setQueues = (name: string, connection:ConnectionOptions = bullMqRedisConnection) => {
+export const setQueues = (name: string, connection: ConnectionOptions = bullMqRedisConnection) => {
 	return new Queue(name, {
 		connection: connection,
 	});
 };
 
-export const setQueueEvents=(name: string, connection:ConnectionOptions = bullMqRedisConnection)=>{
-  return new QueueEvents(name, {
-    connection: connection,
-  });
-}
+export const setQueueEvents = (
+	name: string,
+	connection: ConnectionOptions = bullMqRedisConnection
+) => {
+	return new QueueEvents(name, {
+		connection: connection,
+	});
+};
 
 export const publishQueuesAsync = <T extends Object>(
 	queue: Queue<any, any, string, any, any, string>,
@@ -30,7 +33,7 @@ export const publishQueuesAsync = <T extends Object>(
 export const runWorkers = (
 	queueName: string,
 	queueJob: string | URL | Processor<any, any, string>,
-  connection:ConnectionOptions=bullMqRedisConnection
+	connection: ConnectionOptions = bullMqRedisConnection
 ) => {
 	return new Worker(queueName, queueJob, { connection: connection, removeOnFail: { count: 0 } });
 };

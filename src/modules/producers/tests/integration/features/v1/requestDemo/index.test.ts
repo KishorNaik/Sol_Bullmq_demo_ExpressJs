@@ -16,8 +16,7 @@ const app = appInstance.getServer();
 describe(`Request Demo Integration Test`, () => {
 	// node --trace-deprecation --test --test-name-pattern='should_return_true_if_all_services_passed' --require ts-node/register -r tsconfig-paths/register ./src/modules/producers/tests/integration/features/v1/requestDemo/index.test.ts
 	it(`should_return_true_if_all_services_passed`, async () => {
-
-		const response = await request(app).get('/api/v1/users')
+		const response = await request(app).get('/api/v1/users');
 		expect(response.status).toBe(200);
 		// setTimeout(() => {
 		// 	process.exit(0);

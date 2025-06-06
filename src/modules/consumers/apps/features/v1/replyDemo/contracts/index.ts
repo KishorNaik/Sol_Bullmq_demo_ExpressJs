@@ -1,8 +1,8 @@
 export class ReplyDemoRequestDto {
-  id:number;
+	id: number;
 }
 
 export class ReplyDemoResponseDto {
-  id:number;
-  message:string;
+	id: number;
+	message: string;
 }

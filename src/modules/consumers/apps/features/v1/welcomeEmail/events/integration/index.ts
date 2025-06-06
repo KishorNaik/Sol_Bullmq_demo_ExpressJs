@@ -75,7 +75,7 @@ const sendWelcomeUserEmailIntegrationEventWorkers = runWorkers(
 			)
 		);
 	},
-  bullMqRedisConnection
+	bullMqRedisConnection
 );
 
 // Handle errors
@@ -91,12 +91,12 @@ sendWelcomeUserEmailIntegrationEventWorkers.on('failed', (job, err) => {
 });
 
 sendWelcomeUserEmailIntegrationEventWorkers.on('completed', (job) => {
-  logger.info(
-    logConstruct(
-      'sendWelcomeUserEmailIntegrationEventWorkers',
-      'worker',
-      `Job:${job.id} completed for UserId:${job.data?.identifier}`
-    )
-  );
+	logger.info(
+		logConstruct(
+			'sendWelcomeUserEmailIntegrationEventWorkers',
+			'worker',
+			`Job:${job.id} completed for UserId:${job.data?.identifier}`
+		)
+	);
 });
 // @endregion
