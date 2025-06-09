@@ -113,3 +113,17 @@ cd <your-project-directory>
     npm run dev
     ```
 
+### Example Link
+- Sender and Receiver
+    - Producer
+      https://github.com/KishorNaik/Sol_Bullmq_demo_ExpressJs/blob/main/api/src/modules/producers/apps/features/v1/senderReciverDemo/endpoint/index.ts
+    - Consumer
+      https://github.com/KishorNaik/Sol_Bullmq_demo_ExpressJs/blob/main/api/src/modules/consumers/apps/features/v1/senderReciverDemo/events/index.ts
+- Request and Reply
+    - Producer
+      https://github.com/KishorNaik/Sol_Bullmq_demo_ExpressJs/blob/main/api/src/modules/producers/apps/features/v1/requestReplyDemo/endpoint/index.ts
+    - Consumer
+      https://github.com/KishorNaik/Sol_Bullmq_demo_ExpressJs/blob/main/api/src/modules/consumers/apps/features/v1/requestReplyDemo/events/index.ts
+
+### BullMq Helper
+- https://github.com/KishorNaik/Sol_Bullmq_demo_ExpressJs/tree/main/utils/src/core/shared/utils/helpers/bullMq
